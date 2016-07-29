@@ -11,7 +11,7 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return array(
-            'name'        => 'Reverse Proxy',
+            'name'        => 'Trusted Proxy',
             'description' => '',
             'author'      => 'Joel E. Svensson',
             'icon'        => 'icon-server',
