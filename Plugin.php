@@ -3,6 +3,7 @@
 namespace JoelESvensson\OcTrustedProxy;
 
 use Fideloper\Proxy\TrustProxies;
+use Illuminate\Contracts\Http\Kernel;
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
@@ -65,8 +66,6 @@ class Plugin extends PluginBase
 
     public function boot()
     {
-        $this->app[\Illuminate\Contracts\Http\Kernel::class]
-            ->prependMiddleware(TrustProxies::class)
-        ;
+        $this->app->make(Kernel::class)->prependMiddleware(TrustProxies::class);
     }
 }
