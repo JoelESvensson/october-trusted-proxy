@@ -38,6 +38,7 @@ class Plugin extends PluginBase
                 } else {
                     $proxies = [];
                 }
+
                 $config->set('trustedproxy.proxies', $proxies);
                 return new TrustProxies($config);
             }
