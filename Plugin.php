@@ -18,6 +18,28 @@ class Plugin extends PluginBase
         );
     }
 
+    /**
+     * @param string $ips
+     * @return string|array
+     */
+    protected static function buildIpList($ips)
+    {
+        $ips = trim($ips);
+        if ($ips === '*') {
+            return '*';
+        }
+
+        /**
+         * Create array of IP:s from comma separated string
+         */
+        return collect(explode(',', $ips))
+            ->map(function ($ip) {
+                return trim($ip);
+            })
+            ->toArray()
+        ;
+    }
+
     public function register()
     {
         $this->app->singleton(
@@ -26,16 +48,12 @@ class Plugin extends PluginBase
                 $config = $app->make('config');
                 $proxies = env('TRUSTED_PROXIES');
                 if ($proxies) {
+                    $proxies = static::buildIpList($proxies);
+                } else {
 
                     /**
-                     * Create array of IP:s from comma separated string
+                     * Empty array means no trusted proxies
                      */
-                    $proxies = collect(explode(',', $proxies))
-                        ->map(function ($item) {
-                            return trim($item);
-                        })
-                    ;
-                } else {
                     $proxies = [];
                 }
 
