@@ -8,6 +8,11 @@ use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
 {
+    /**
+     * This plugin always needs to run
+     */
+    public $elevated = true;
+
     public function pluginDetails()
     {
         return array(
